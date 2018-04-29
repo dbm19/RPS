@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Daniel's Rock Paper Scissors Project</title>
+    </head>
+    <body>
+        <h1 align = "center">Rock, Paper, Scissors!</h1>
+        <p align = "center"s>First player to five points wins!</p>
+        <div id = "btnSection" align = "center">
+            <button type = "button" id = "rockBtn">Rock</button>
+            <button type = "button" id = "paperBtn">Paper</button>
+            <button type = "button" id = "scissorsBtn">Scissors</button>
+        </div>
+        <div id = "playerHand" align = "center"></div>
+        <div id = "computerHand" align = "center"></div>
+        <div id = "resultSection" align = "center"></div>
+        <div id ="scoreSection" align = "center"></div>
+        <script>
+            let playerSelection = "";
+            let computerSelection = "";
+            let playerScore = 0;
+            let computerScore = 0;
+
+            function playRock(){
+                 playRound("Rock", computerSelection);
+            }
+            function playPaper(){
+                playRound("Paper", computerSelection);
+            }
+            function playScissors(){
+                playRound("Scissors", computerSelection);
+            }
+
+            rockBtn.addEventListener("click", playRock);
+            paperBtn.addEventListener("click", playPaper);
+            scissorsBtn.addEventListener("click", playScissors);
+
+            function computerPlay(){
+                let computerHandIndex = Math.floor((Math.random() * 3) + 1);
+                if (computerHandIndex === 1){
+                    return "Rock";
+                }
+                else if (computerHandIndex === 2){
+                    return "Scissors";
+                }
+                else{
+                    return "Paper";
+                }
+                return;
+            }
+
+            function playRound(playerSelection, computerSelection){
+                computerSelection = computerPlay();
+                if (playerSelection === "Rock" && computerSelection ==="Scissors"){
+                        playerScore += 1;
+                        playerHand.textContent = "You played Rock!";
+                        computerHand.textContent = "The computer played Scissors!";                       
+                    }
+                    else if (playerSelection === "Rock" && computerSelection ==="Paper"){
+                        computerScore += 1;
+                        playerHand.textContent = "You played Rock!";
+                        computerHand.textContent = "The computer played Paper!";                        
+                    }
+                    else if (playerSelection === "Rock" && computerSelection ==="Rock"){
+                        playerHand.textContent = "You played Rock!";
+                        computerHand.textContent = "The computer played Rock!";                        
+                    }
+                    else if (playerSelection === "Scissors" && computerSelection ==="Rock"){
+                        computerScore += 1;
+                        playerHand.textContent = "You played Scissors!";
+                        computerHand.textContent = "The computer played Rock!";                       
+                    }
+                    else if (playerSelection === "Scissors" && computerSelection ==="Paper"){               
+                        playerScore += 1;
+                        playerHand.textContent = "You played Scissors!";
+                        computerHand.textContent = "The computer played Paper!";                        
+                    }
+                    else if (playerSelection === "Scissors" && computerSelection ==="Scissors"){
+                        playerHand.textContent = "You played Scissors!";
+                        computerHand.textContent = "The computer played Scissors!";                        
+                    }
+                    else if (playerSelection === "Paper" && computerSelection ==="Rock"){            
+                        playerScore += 1;
+                        playerHand.textContent = "You played Paper!";
+                        computerHand.textContent = "The computer played Rock!";                       
+                    }
+                    else if (playerSelection === "Paper" && computerSelection ==="Scissors"){
+                        computerScore += 1;
+                        playerHand.textContent = "You played Paper!";
+                        computerHand.textContent = "The computer played Scissors!";
+                    }
+                    else if (playerSelection === "Paper" && computerSelection ==="Paper"){
+                        playerHand.textContent = "You played Paper!";
+                        computerHand.textContent = "The computer played Paper!";                        
+                    }                   
+                    scoreSection.textContent = "Your score: " + playerScore + " The computer's score: " + computerScore;
+                    if (playerScore == 5 ){
+                        var message = document.createElement("p");
+                        message.textContent = "You win!";
+                        resultSection.appendChild(message);
+                        playerScore = 0;
+                        computerScore = 0;
+                    }
+                    if (computerScore == 5){
+                        var message = document.createElement("p");
+                        message.textContent = "The computer wins!";
+                        resultSection.appendChild(message);
+                        playerScore = 0;
+                        computerScore = 0;
+                    }
+            }
+        </script>
+    </body>
+</html>
